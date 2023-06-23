@@ -1,0 +1,73 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block a %}
+<style>
+    input[type=text][type=password]{
+    border-radius:8px;
+    width:600px;
+    height:16px;
+    }
+</style>
+{% if error %}
+<script>
+alert('Ragistration Sucessfull');
+window.location='{% url 'login_customer' %}';
+</script>
+{% endif %}
+
+
+<div class="container p-4 bg-white rounded text-center">
+  <h3><strong>Register your account</strong></h3>
+  <hr>
+  <form method="post" action="">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="fname" class="form-label text-center">First Name:</label>
+      <input type="text" style="border-radius:8px;width:300px;height:40px;margin: 0 auto;" class="form-control text-center" id="fname" required placeholder="Enter first name" name="fname">
+    </div>
+    <div class="mb-3">
+      <label for="lname" class="form-label text-center">Last Name:</label>
+      <input type="text" style="border-radius:8px;width:300px;height:40px;margin: 0 auto;" class="form-control text-center" id="lname" required placeholder="Enter last name" name="lname">
+    </div>
+    <div class="mb-3">
+      <label for="uname" class="form-label text-center">User Name:</label>
+      <input type="text" style="border-radius:8px;width:300px;height:40px;margin: 0 auto;" class="form-control text-center" id="uname" required placeholder="Enter user name" name="uname">
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label text-center">Password:</label>
+      <input type="password" style="border-radius:8px;width:300px;height:40px;margin: 0 auto;" class="form-control text-center" id="pwd" required placeholder="Enter password" name="pwd">
+    </div>
+    <div class="mb-3">
+      <label class="form-label text-center">Gender:</label>
+      <div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" value="Male" name="male" id="male">
+          <label class="form-check-label" for="male">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" value="Female" name="male" id="female">
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label text-center">Email:</label>
+      <input type="email" style="border-radius:8px;width:300px;height:40px;margin: 0 auto;" class="form-control text-center" id="email" placeholder="Enter email" name="email">
+    </div>
+    <div class="mb-3">
+      <label for="mobile" class="form-label text-center">Mobile:</label>
+      <input type="text" style="border-radius:8px;width:300px;height:40px;margin: 0 auto;" class="form-control text-center" id="mobile" required placeholder="Enter mobile number" name="mobile">
+    </div>
+    <div class="mb-3">
+      <label for="birth" class="form-label text-center">Date of Birth:</label>
+      <input type="date" style="border-radius:8px;width:300px;height:40px;margin: 0 auto;" class="form-control text-center" id="birth" required placeholder="Enter your Date of Birth" name="birth">
+</div>
+    <div class="mb-3">
+      <label for="add" class="form-label text-center">Full Address:</label>
+      <input type="text" style="border-radius:8px;width:300px;height:40px;margin: 0 auto;" class="form-control text-center" id="add" required placeholder="Enter Address" name="add">
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
+
+{% endblock %}

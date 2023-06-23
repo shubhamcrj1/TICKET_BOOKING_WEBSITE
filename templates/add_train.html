@@ -1,0 +1,71 @@
+{% extends 'navigation3.html' %}
+{% load static %}
+{% block b %}
+<style>
+    input[type=text][type=time][type=file]{
+    border-radius:8px;
+    width:600px;
+    height:16px;
+    }
+    .form-group{
+    font-size:16px;
+    }
+</style>
+{% if error %}
+<script>alert('Added New Train Successfully');
+window.location='{% url 'view_train' %}';
+</script>
+{% endif %}
+<div class="card">
+  <div class="card-header">
+    <h3 style="text-align:center">Add New Train</h3>
+  </div>
+  <center><div style="padding-top:30px;"class="card-body">
+    <form method="post" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="trainname" style="text-align:center">Train Name</label><br>
+        <input type="text" required id="trainname" name="busname" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label for="trainno" style="text-align:center">Train No.</label><br>
+        <input type="text" required id="trainno" name="bus_no" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label for="from" style="text-align:center">From (Source)</label><br>
+        <input type="text" required id="from" name="fcity" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label for="to" style="text-align:center">To (Destination)</label><br>
+        <input type="text" required id="to" name="tcity" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label for="departuretime" style="text-align:center">Departure Time</label><br>
+        <input type="text" required id="departuretime" name="dtime" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label for="arrivaltime" style="text-align:center">Arrival Time</label><br>
+        <input type="text" required id="arrivaltime" name="atime" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label for="traveltime" style="text-align:center">Travel Time</label><br>
+        <input type="text" required id="traveltime" name="ttime" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label for="distance" style="text-align:center">Distance (in Km)</label><br>
+        <input type="number" required id="distance" name="dis" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label for="seatsf" style="text-align:center">Seats</label><br>
+        <input type="text" required id="seatsf" name="seat" style="width:600px;">
+      </div>
+      <div class="form-group">
+        <label style="text-align:center">Image</label><br>
+        <input type="file" name="img" required style="width:600px;">
+      </div>
+      <input type="submit" value="Add Train" style="color:white;border-radius:0px;width:100px;height:35px;background-color:#333;border:1px solid black;text-align:center;">
+    </form>
+  </div>
+</div></center>
+
+{% endblock %}

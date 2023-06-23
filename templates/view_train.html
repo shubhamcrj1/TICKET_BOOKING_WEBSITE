@@ -1,0 +1,59 @@
+{% extends 'navigation3.html' %}
+{% load static %}
+{% block b %}
+<style>
+    input[type=text][type=password]{
+    border-radius:8px;
+    width:600px;
+    height:16px;
+    }
+</style>
+<div style="color:Black;border:1px solid white;border-radius:8px;background-color:#EDC7B7;padding:50px">
+        <center><h3 style="color:#AC3B61;font-size:32px;"><strong>Train Details</strong></h3><hr></center>
+
+<div class="container">
+<table class="table table-bordered" id="myTable">
+  <thead style="color:white;background-color:#02286F">
+  <tr>
+    <th>Sr No</th>
+    <th>Train Name</th>
+      <th>Train No.</th>
+      <th>From City</th>
+      <th>To city</th>
+    <th>Dep Time</th>
+    <th>Arr time</th>
+       <th>Travel Time</th>
+       <th>Distance</th>
+      <th>Seats</th>
+      <th>Image</th>
+  </tr>
+  </thead>
+   <tbody>
+
+    {% for i in data %}
+
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{i.trainname}}</td>
+    <td>{{i.train_no}}</td>
+      <td>{{i.from_city}}</td>
+      <td>{{i.to_city}}</td>
+      <td>{{i.departuretime}}</td>
+      <td>{{i.arrivaltime}}</td>
+      <td>{{i.trevaltime}}</td>
+      <td>{{i.distance}}</td>
+      <td>{{i.seats}}</td>
+      <td><a href="http://127.0.0.1:8000/media/{{i.img}}">{{i.img}}</a></td>
+<!--
+
+-->
+  </tr>
+     {% endfor %}
+    </tbody>
+</table>
+
+ </div>
+
+</div>
+
+{% endblock %}

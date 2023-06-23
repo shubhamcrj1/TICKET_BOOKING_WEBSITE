@@ -1,0 +1,56 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block a %}
+<style>
+    .right-image {
+    position: absolute;
+    margin-top:100px;
+    margin-left:1180px;
+    border-radius:50%;
+  }
+  .para{
+  position:relative;
+  }
+.kp{
+padding-bottom:15px;
+padding-left:50px;
+padding-right:380px;
+padding-top:20px;
+font-size:18px;
+}
+.po{
+padding-left:50px;
+padding-bottom:20px;
+font-size:24px;
+}
+</style>
+<div style="position:absolute;margin:0px;color:#05386B;background-color:#E0FAB3">
+    <center><h3 style="padding-left:50px;padding-bottom:20px;font-size:35px; color:#6F0230"><strong>About Project</strong></h3></center>
+    <div>
+    <div class="para">
+        <img class="right-image" src="{% static 'images/img14.jpg' %}" alt="Image"  height=300px width=300px>
+        <strong class="po">Book Your Train Tickets Online with Ease</strong><br>
+        <p class="kp">Welcome to our website's train ticket booking section,
+            where you can conveniently plan your journeys and secure your
+            train tickets hassle-free. We understand the importance of a
+            smooth and efficient travel experience, which is why we provide
+            a user-friendly platform that allows you to book train tickets
+            from the comfort of your own home.</p>
+        <strong class="po">Seamless Booking Process</strong><br>
+        <p class="kp">Our goal is to make your train ticket booking process seamless and straightforward.
+            With just a few clicks, you can browse through various train schedules,
+            select your preferred route, and reserve your tickets for the desired date
+            and time. We have partnered with trusted railway networks to offer you a
+            comprehensive selection of destinations and routes, both domestic and international.</p>
+        <strong class="po">Conclusion</strong><br>
+        <p class="kp">Booking train tickets has never been easier. With our user-friendly platform, extensive choices,
+            and reliable customer support, you can effortlessly plan your train journeys and secure your
+            tickets with confidence. Enjoy the convenience of online booking and embark on your travels
+            with peace of mind. Start exploring our website today and make your train travel dreams a reality.</p>
+</div>
+    </div>
+<!--<div class="container">-->
+<!--</div>-->
+<!--</div>-->
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'head.html' %}
+{% load static %}
+{% block body %}
+<!--<style>-->
+<!--.id2 {-->
+<!--  list-style-type: none;-->
+<!--  margin: 0;-->
+<!--  padding: 0;-->
+<!--  overflow: hidden;-->
+<!--  background-color: #333;-->
+<!--   border-radius:10px;-->
+<!--  border:1px solid #bbb;-->
+
+<!--}-->
+
+<!--.id1 {-->
+<!--  float: left;-->
+<!--  border-right:1px solid #bbb;-->
+<!--}-->
+
+<!--li:last-child {-->
+<!--  border-right: none;-->
+<!--}-->
+
+<!--li a {-->
+<!--  display: block;-->
+<!--  color: white;-->
+<!--  text-align: center;-->
+<!--  padding: 14px 16px;-->
+<!--  text-decoration: none;-->
+<!--}-->
+
+<!--li a:hover:not(.active) {-->
+<!--  background-color: #111;-->
+<!--   border-radius:10px;-->
+<!--}-->
+
+<!--.active {-->
+<!--  background-color: #4CAF50;-->
+<!--  border-radius:10px;-->
+<!--}-->
+<!--</style>-->
+<style>
+  .nav-link {
+  padding: 15px 20px;
+  font-size: 2.05rem;
+  color:red;
+}
+.navbar{
+margin-bottom:0px;
+}
+.custom-navbar {
+      background-color: #ABF2F7; /* Replace with your custom color */
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+  <div class="container-fluid style=">
+<!--    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt="Uh oh" width="30" height="30"></a>-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+         <strong> <a class="nav-link px-3" href={% url 'nav' %}>Home</a></strong>
+        </li>
+        <li class="nav-item">
+          <strong><a class="nav-link px-3" href="{% url 'about' %}">About</a></strong>
+        </li>
+        <li class="nav-item">
+          <strong><a class="nav-link px-3" href="{% url 'contact' %}">Contact</a></strong>
+        </li>
+        <li class="nav-item">
+         <strong> <a class="nav-link px-3" href="{% url 'login_customer' %}">Login</a></strong>
+        </li>
+        <li class="nav-item">
+          <strong></b><a class="nav-link px-3" href="{% url 'register_customer' %}">Register</a></strong>
+        </li>
+        <li class="nav-item">
+         <strong> <a class="nav-link px-3" href="#"></strong>
+            <i class="bi bi-search" style="font-size: 1.5rem;"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  {% block a %}
+  {% endblock %}
+
+
+
+{% endblock %}

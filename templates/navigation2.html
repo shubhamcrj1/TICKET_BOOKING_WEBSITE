@@ -1,0 +1,57 @@
+{% extends 'head.html' %}
+{% load static %}
+{% block body %}
+<link rel = stylesheet href = "//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+  </script>
+<style>
+  .custom-navbar {
+      background-color: #ABF2F7;
+    }
+    .nav-link {
+  padding: 15px 20px;
+  font-size: 2rem;
+  color:red;
+}
+</style>
+ <a href="" style="font-size:16px;margin-left:1100px;margin-top:120px;color:black;"><strong style="color:#02286F;">Welcome {{request.user.username}}</strong></a>
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+  <div class="container-fluid style=">
+<!--    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt="Uh oh" width="30" height="30"></a>-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+         <strong> <a class="nav-link px-3" href={% url 'dashboard' %}>Dashboard</a></strong>
+        </li>
+        <li class="nav-item">
+          <strong><a class="nav-link px-3" href="{% url 'search_train' %}">SearchTrain</a></strong>
+        </li>
+        <li class="nav-item">
+          <strong><a class="nav-link px-3" href="{% url 'my_booking' %}">MyBooking</a></strong>
+        </li>
+        <li class="nav-item">
+         <strong> <a class="nav-link px-3" href="{% url 'log_out' %}">Logout</a></strong>
+        </li>
+        <li class="nav-item">
+         <strong> <a class="nav-link px-3" href="#"></strong>
+            <i class="bi bi-search" style="font-size: 1.5rem;"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% block b %}
+{% endblock %}
+
+
+
+{% endblock %}
