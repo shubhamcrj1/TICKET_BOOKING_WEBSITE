@@ -393,7 +393,7 @@ def generate_ticket(request, pid):
     p.drawString(180, 575, "Departure: {}".format(ticket.passenger.train.departuretime))
     p.drawString(180, 550, "Route: {}".format(ticket.route))
     p.drawString(180, 525, "Date: {}".format(ticket.date2))
-    p.drawString(180, 500, "Fare: {}".format(ticket.fare))
+    p.drawString(180, 500, "Fare: {}".format(ticket.passenger.fare))
 
     # Draw borders
     p.rect(140, 490, 280, 230)  # Border around ticket details section
