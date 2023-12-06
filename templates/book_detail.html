@@ -11,7 +11,7 @@
 {% if error %}
 <script>
     alert('Passenger Added Successfully')
-    window.location='{% url 'book_detail' coun data2.id route1 %}'
+    window.location='{% url 'book_detail' coun data2.id route1 route_type fare_trip date_of_return %}'
 </script>
 {% endif %}
 
@@ -24,7 +24,7 @@
             <td><b>Train Name: {{data2.trainname}}</b><br>
                 Train Number: {{data2.train_no}}<br>
                 From City: {{data2.from_city}}<br>
-                Fare: {{data.fare}}<br></td>
+                Fare: {{fare_trip}}<br></td>
         </tr>
     </table><hr>
 
@@ -71,9 +71,13 @@
     <td>{{i.train.trainname}}. {{i.train.train_no}}</td>
       <td>{{i.age}}</td>
       <td>{{i.gender}}</td>
-      <td>{{i.date1}}</td>
-      <td>{{i.fare}}</td>
-    <td><a href="{% url 'delete_passenger' i.id data2.id route1 %}" style="color:red"><u>Delete</u></a></td>
+      <td>Start: {{i.date1}} <br> 
+        {% if route_type == 'two' %}
+        End: {{date_of_return}}
+        {% endif %}
+      </td>
+      <td>{{fare_trip}}</td>
+    <td><a href="{% url 'delete_passenger' i.id data2.id route1 route_type fare_trip date_of_return %}" style="color:red"><u>Delete</u></a></td>
       {% endif %}
 
   </tr>
@@ -81,10 +85,33 @@
     {% endfor %}
     </tbody>
 </table>
+  <div style="margin-top: 20px; border: #333; border-width: 2px;  border-style:solid;">
+    <div style="justify-content: center; display: block; margin-bottom: 30px;">
+    <h2>Booking Details</h2>
+    </div>
+    {% for i in pro %}
+    {% if i.status != 'set' %}
+    <div style="display: flex;justify-content: space-evenly;">
+      <h4>Name: {{i.name}}</h4>
+      <h4>Age: {{i.age}}</h4>
+      <h4>Gender: {{i.gender}}</h4>
+      <h4>Fare: {{fare_trip}}</h4>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <h3 style="position: static;">Total Fare:<span style="color: red;"> {{total_before_conc}}</span></h3>
+    {% if route_type == 'two' %}
+    <h3 >Concession: <span style="color: red;">{{conc}}</span> </h3>
+    {% else %}
+    <h3 >Concession: <span style="color: red;">0</span> </h3>
+    {% endif %}
+    <h2>Amount to be Paid <span style="color: red;">{{total}}</span></h2>
+
+  </div>
 
  </div><br>
 <div style="background-color:#333;padding-left:990px;border-radius:8px;padding-top:3px;padding-bottom:3px"><h4 style="color:white;"><strong>Total = {{total}}</strong>
-    <button style="background-color:green;margin-left:25px;border-radius:6px;border:1px solid red;padding:8px"><a href="{% url 'card_detail' total coun route1 pid %}" style="color:#333">Book Now</a> </button></h4></div>
+    <button style="background-color:green;margin-left:25px;border-radius:6px;border:1px solid red;padding:8px"><a href="{% url 'card_detail' total coun route1 pid date_of_return %}" style="color:#333">Book Now</a> </button></h4></div>
 
 </div>
 

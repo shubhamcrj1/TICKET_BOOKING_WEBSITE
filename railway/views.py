@@ -91,40 +91,76 @@ def Search_Train(request):
     route=0
     b_no =[]
     b_no1 =[]
+    route_type="one"
+    da2=0
     bhu=0
     if request.method=="POST":
         f = request.POST["fcity"]
         t = request.POST["tcity"]
         da = request.POST["date"]
-        data1 = Add_route.objects.filter(route=f)
-        data2 = Add_route.objects.filter(route=t)
-        for i in data1:
-            for j in data2:
-                if i.train.train_no==j.train.train_no:
-                    route1.append(Add_Train.objects.filter(train_no=i.train.train_no))
-        for i in data1:
-            fare1=i.fare
-            count+=1
-            b_no.append(i.train.train_no)
-        for i in data2:
-            fare2 = i.fare
-            count1+=1
-            b_no1.append(i.train.train_no)
+        da2=request.POST["date2"]
+        route_type=request.POST["route_type"]
+        print(route_type)
+        if(route_type=="one"):
+            data1 = Add_route.objects.filter(route=f)
+            data2 = Add_route.objects.filter(route=t)
+            for i in data1:
+                for j in data2:
+                    if i.train.train_no==j.train.train_no:
+                        route1.append(Add_Train.objects.filter(train_no=i.train.train_no))
+            for i in data1:
+                fare1=i.fare
+                count+=1
+                b_no.append(i.train.train_no)
+            for i in data2:
+                fare2 = i.fare
+                count1+=1
+                b_no1.append(i.train.train_no)
 
-        fare3 = fare2-fare1
-        if fare3<5 and fare3>0:
-            fare3 = 5
-        elif fare3<0:
-            fare3 = fare3*(-1)
-        elif fare3==0:
-            fare3 = fare3
-        route = f+" to "+t
-        Asehi.objects.create(fare=fare3,train_name="bus2",date3=da)
-        for i in ase:
-            coun = coun + 1
-            error=True
+            fare3 = fare2-fare1
+            if fare3<5 and fare3>0:
+                fare3 = 5
+            elif fare3<0:
+                fare3 = fare3*(-1)
+            elif fare3==0:
+                fare3 = fare3
+            route = f+" to "+t
+            Asehi.objects.create(fare=fare3,train_name="bus2",date3=da)
+            for i in ase:
+                coun = coun + 1
+                error=True
+        else:
+            data1 = Add_route.objects.filter(route=f)
+            data2 = Add_route.objects.filter(route=t)
+            for i in data1:
+                for j in data2:
+                    if i.train.train_no==j.train.train_no:
+                        route1.append(Add_Train.objects.filter(train_no=i.train.train_no))
+            for i in data1:
+                fare1=i.fare
+                count+=1
+                b_no.append(i.train.train_no)
+            for i in data2:
+                fare2 = i.fare
+                count1+=1
+                b_no1.append(i.train.train_no)
 
-    d={"data2":data,'route1':route1,'fare3':fare3,"error":error,'coun':coun,'route':route}
+            fare3 = fare2-fare1
+            if fare3<5 and fare3>0:
+                fare3 = 5
+            elif fare3<0:
+                fare3 = fare3*(-1)
+            elif fare3==0:
+                fare3 = fare3
+            route = f+" to "+t
+            Asehi.objects.create(fare=fare3,train_name="bus2",date3=da)
+            for i in ase:
+                coun = coun + 1
+                error=True
+            fare3=fare3*2
+
+
+    d={"data2":data,'route1':route1,'fare3':fare3,"error":error,'coun':coun,'route':route,'route_type':route_type,'date_of_return':da2}
     return render(request,'search_train.html',d)
 
 
@@ -137,7 +173,7 @@ def Logout(request):
     logout(request)
     return redirect('nav')
 
-def Book_detail(request,coun,pid,route1):
+def Book_detail(request,coun,pid,route1,route_type,trip_fare,date_of_return):
     if not request.user.is_authenticated:
         return redirect('login')
     error = False
@@ -152,9 +188,13 @@ def Book_detail(request,coun,pid,route1):
     pro = Passenger.objects.filter(user=user1)
     book = Book_ticket.objects.filter(user=user1)
     total = 0
+    print(data)
     for i in pro:
         if i.status!="set":
+            if route_type=="two":
+                total=total+i.fare
             total = total + i.fare
+
     passengers = Passenger.objects.filter(user=user1)
     passenger = 0
     if request.method=="POST":
@@ -173,11 +213,17 @@ def Book_detail(request,coun,pid,route1):
             error = True
             data2.seats = s
             data2.save()
-    d = {'data':data,'data2':data2,'pro':pro,'total':total,'book':book,'error':error,'route1':route1,'coun':coun,'pid':pid}
+    total_before_conc=total
+    conc=0;
+    if route_type=="two":
+        conc=0.1*total
+    total-=conc
+
+    d = {'data':data,'data2':data2,'pro':pro,'total':total,'book':book,'error':error,'route1':route1,'coun':coun,'pid':pid,'fare_trip':trip_fare,'route_type':route_type,'date_of_return':date_of_return,'conc':conc,'total_before_conc':total_before_conc}
     return render(request,'book_detail.html',d)
 def Errb(request):
     return render(request,'error.html')
-def Delete_passenger(request,pid,bid,route1):
+def Delete_passenger(request,pid,bid,route1,route_type,trip_fare,date_of_return):
     if not request.user.is_authenticated:
         return redirect('login')
     data = Passenger.objects.get(id=pid)
@@ -187,9 +233,9 @@ def Delete_passenger(request,pid,bid,route1):
     for i in ase:
         coun = coun + 1
     messages.info(request,'Passenger Deleted Successfully')
-    return redirect('book_detail', coun,bid,route1)
+    return redirect('book_detail', coun,bid,route1,route_type,trip_fare,date_of_return)
 
-def Card_Detail(request,total,coun,route1,pid):
+def Card_Detail(request,total,coun,route1,pid,date_of_return):
     if not request.user.is_authenticated:
         return redirect('login')
     error=False
@@ -214,7 +260,7 @@ def Card_Detail(request,total,coun,route1,pid):
         return redirect('my_booking')
 
     total1=total
-    d = {'user':user1,'data':data,'data2':data2,'pro':pro,'pro1':pro1,'total':total1,'book':book,'error':error,'route1':route1,'count':count}
+    d = {'user':user1,'data':data,'data2':data2,'pro':pro,'pro1':pro1,'total':total1,'book':book,'error':error,'route1':route1,'count':count,'date_of_return':date_of_return}
     return render(request,'card_detail.html',d)
 
 

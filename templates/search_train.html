@@ -20,10 +20,11 @@
             <td><b><br>Train Name: {{i.0.trainname}}</b><br>
                 Train Number: {{i.0.train_no}}<br>
                 From City: {{i.0.from_city}}<br>
+                Route Type: {{route_type}} way(s)<br>
                 Fare: {{fare3}}<br>
                  Seats:{{i.0.seats}}<br></td>
 
-            <td><br><br><button style="background-color:#333;border:1px solid black;border-radius:8px;padding:10px"><a href="{% url 'book_detail' coun i.0.id route %}" style="padding:30px;color:white;">Book Now</a></button><br><br></td>
+            <td><br><br><button style="background-color:#333;border:1px solid black;border-radius:8px;padding:10px"><a href="{% url 'book_detail' coun i.0.id route1 route_type fare3 date_of_return %}" style="padding:30px;color:white;">Book Now</a></button><br><br></td>
         </tr>
         {% endfor %}
     </table><br>
@@ -49,7 +50,15 @@
 
                      </select><br><br>
 
-        Travel Date:<br><input type="date" name="date" style="border-radius:8px;width:600px;height:35px;"><br><br>
+        <input type="radio" name="route_type" value="one" checked/>
+        <label for="one">One Way</label>
+        <input type="radio" name="route_type" value="two" />
+        <label for="one">Two Way</label>
+
+        <br>
+        Travel Date-1:<br><input type="date" name="date" style="border-radius:8px;width:600px;height:35px;"><br><br>
+        Travel Date-2:<br><input type="date" name="date2" style="border-radius:8px;width:600px;height:35px;"><br><br>
+
         <input type="submit" value="Search" style="color:white;border-radius:8px;width:115px;height:35px;background-color:#333;border:1px solid black">
     </form>
     {% endif %}
