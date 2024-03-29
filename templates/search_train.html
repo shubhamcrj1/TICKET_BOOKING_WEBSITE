@@ -24,7 +24,7 @@
                 Fare: {{fare3}}<br>
                  Seats:{{i.0.seats}}<br></td>
 
-            <td><br><br><button style="background-color:#333;border:1px solid black;border-radius:8px;padding:10px"><a href="{% url 'book_detail' coun i.0.id route1 route_type fare3 date_of_return %}" style="padding:30px;color:white;">Book Now</a></button><br><br></td>
+            <td><br><br><button style="background-color:#333;border:1px solid black;border-radius:8px;padding:10px"><a href="{% url 'book_detail' coun i.0.id route route_type fare3 date_of_return %}" style="padding:30px;color:white;">Book Now</a></button><br><br></td>
         </tr>
         {% endfor %}
     </table><br>
