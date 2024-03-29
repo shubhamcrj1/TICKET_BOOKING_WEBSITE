@@ -99,10 +99,9 @@ def Search_Train(request):
         t = request.POST["tcity"]
         route_type=request.POST["route_type"]
         da = request.POST["date"]
-        if(route_type=="one"):
-            da2=da
-        else:
-        da2=request.POST["date2"]
+        da2=da
+        if(route_type=="two"):
+            da2=request.POST["date2"]
         print(route_type)
         if(route_type=="one"):
             data1 = Add_route.objects.filter(route=f)
